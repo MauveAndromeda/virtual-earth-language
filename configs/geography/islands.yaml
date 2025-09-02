@@ -1,0 +1,7 @@
+# @package geography
+terrain: "islands"
+size: [200, 200]
+migration_rate: 0.001
+contact_probability: 0.01
+num_islands: 12
+island_sizes: [20, 50]

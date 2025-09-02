@@ -1,0 +1,62 @@
+# Virtual Earth Language Evolution - Base Configuration
+
+defaults:
+  - _self_
+
+environment:
+  type: "referential_game"
+  attributes:
+    color: 8
+    shape: 8
+    size: 3
+    position: 4
+  max_episode_steps: 100
+  
+geography:
+  terrain: "plains"
+  size: [100, 100]
+  migration_rate: 0.1
+  contact_probability: 0.05
+  
+population:
+  size: 1000
+  speaker_cls: "SpeakerAgent"
+  listener_cls: "ListenerAgent"
+  
+communication:
+  vocab_size: 128
+  max_message_length: 8
+  channel_noise: 0.0
+  
+objectives:
+  alpha: 1.0    # Task success weight
+  beta: 0.5     # Mutual information weight
+  gamma: 0.3    # Topological similarity weight
+  lambda1: 0.1  # Length penalty
+  lambda2: 0.05 # Entropy penalty
+  
+training:
+  algorithm: "ppo"
+  total_steps: 1000000
+  batch_size: 64
+  learning_rate: 3e-4
+  iterated_learning: true
+  generations: 100
+  device: "auto"  # auto-detect GPU
+  
+evaluation:
+  eval_frequency: 10000
+  num_eval_episodes: 100
+  save_frequency: 50000
+  
+logging:
+  use_wandb: false  # Set to true when ready
+  project_name: "virtual-earth-language"
+  log_frequency: 1000
+  tensorboard: true
+
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}

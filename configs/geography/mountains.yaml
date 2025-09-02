@@ -1,0 +1,7 @@
+# @package geography
+terrain: "mountains"
+size: [150, 150]
+migration_rate: 0.02
+contact_probability: 0.02
+barrier_strength: 0.8
+elevation_variance: 50
