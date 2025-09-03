@@ -86,3 +86,8 @@ Thumbs.db
 .nv/
 upload.sh
 *token*
+
+# Prevent token commits
+*token*
+*secret*
+upload.sh
