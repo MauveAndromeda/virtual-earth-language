@@ -10,4 +10,5 @@ run-min:
 test:
 	PYTHONPATH=. pytest -q
 	PYTHONPATH=. pytest -q
+	PYTHONPATH=. pytest -q
 	pytest -q
