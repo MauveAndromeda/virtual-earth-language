@@ -1,24 +1,35 @@
-"""Virtual Earth Language Evolution
+"""Virtual Earth: Interpretable Language Evolution
 
-A framework for studying emergent language evolution in multi-agent systems
-with geographic and demographic constraints.
+A breakthrough framework for emergent communication that produces 
+human-readable languages instead of private codes.
 
-Optimized for Ubuntu/Linux systems with CUDA support.
+Key Innovation: Interpretability-First Design
+- Slot-based structured grammar
+- Dual-channel (Code ↔ Explanation) system  
+- Teaching and learning protocols
+- Cross-population translation bridges
+
+Ubuntu-optimized with CUDA support.
 """
 
-__version__ = "0.1.0"
-__author__ = "Your Name"
+__version__ = "2.0.0-interpretable"
+__author__ = "MauveAndromeda"
 
 import os
 import torch
 
-# Auto-detect GPU on Ubuntu
+# System info with interpretability focus
 if torch.cuda.is_available():
     print(f"🚀 CUDA detected: {torch.cuda.get_device_name()}")
     print(f"📊 GPU Memory: {torch.cuda.get_device_properties(0).total_memory // 1024**3}GB")
+    print("🧠 Ready for interpretable communication at scale!")
 else:
     print("💻 Running on CPU")
+    print("🧠 Interpretability framework ready!")
 
-# Set optimal threading for Ubuntu
+# Optimal threading for Ubuntu
 if hasattr(torch, 'set_num_threads'):
     torch.set_num_threads(min(8, os.cpu_count()))
+
+print(f"🌍 Virtual Earth v{__version__} - Interpretable Language Evolution")
+print("📚 Documentation: https://github.com/MauveAndromeda/virtual-earth-language")

@@ -1,15 +1,8 @@
-"""Environment modules for emergent communication."""
-
+"""Interpretability-focused emergent communication modules."""
 from .referential_game import ReferentialGame
-
+# TODO: Add InterpretableReferentialGame
 try:
-    from .gridworld import GridWorldEnv
-    from .geography import GeographyModule
+    from .interpretable_game import InterpretableReferentialGame
+    __all__ = ["ReferentialGame", "InterpretableReferentialGame"]
 except ImportError:
-    # Graceful fallback for incomplete modules
-    GridWorldEnv = None
-    GeographyModule = None
-
-__all__ = ["ReferentialGame"]
-if GridWorldEnv is not None:
-    __all__.extend(["GridWorldEnv", "GeographyModule"])
+    __all__ = ["ReferentialGame"]
