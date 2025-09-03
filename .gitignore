@@ -91,3 +91,8 @@ upload.sh
 *token*
 *secret*
 upload.sh
+
+# Prevent token commits
+*token*
+*secret*
+upload.sh
