@@ -17,3 +17,5 @@ jobs:
       run: PYTHONPATH=. python experiments/minimal_run.py
     - name: Tests (allowed to be sparse for v0.1.0)
       run: PYTHONPATH=. pytest -q
+      - name: Verify repo (MWE)
+        run: PYTHONPATH=. python scripts/verify_repo.py
