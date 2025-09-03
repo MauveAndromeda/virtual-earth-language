@@ -84,3 +84,5 @@ Thumbs.db
 
 # GPU cache
 .nv/
+upload.sh
+*token*
