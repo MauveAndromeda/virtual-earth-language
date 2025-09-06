@@ -1,0 +1,15 @@
+:root { --bg:#0b0f1a; --panel:#121826; --text:#e6edf3; --muted:#8aa0b6; --accent:#6ee7ff; }
+*{ box-sizing:border-box }
+html,body,#root{ height:100%; margin:0; background:var(--bg); color:var(--text) }
+a{ color:var(--accent); text-decoration:none }
+.app{
+  display:grid; grid-template-columns:320px 1fr 340px; grid-template-rows:auto 1fr;
+  grid-template-areas:'header header header' 'left main right'; height:100vh; gap:10px; padding:10px;
+}
+header{ grid-area:header; background:var(--panel); border-radius:12px; padding:12px 16px; display:flex; align-items:center; justify-content:space-between }
+.panel{ background:var(--panel); border-radius:12px; padding:12px }
+.left{ grid-area:left } .main{ grid-area:main; position:relative } .right{ grid-area:right }
+.btn{ background:#1f2937; border:1px solid #334155; color:var(--text); padding:8px 12px; border-radius:8px; cursor:pointer }
+.btn:hover{ border-color:#475569 }
+.viewer{ position:absolute; inset:0; border-radius:12px; overflow:hidden }
+.metric{ font-size:12px; color:var(--muted) }

@@ -1,0 +1,7 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature", "properties": {"name": "Sample A", "type": "demo"}, "geometry": { "type": "Point", "coordinates": [-73.9857, 40.7484] } },
+    { "type": "Feature", "properties": {"name": "Sample B", "type": "demo"}, "geometry": { "type": "Point", "coordinates": [-74.0445, 40.6892] } }
+  ]
+}
