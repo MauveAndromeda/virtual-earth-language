@@ -1,9 +1,13 @@
 name: Web CI
 on:
   push:
-    paths: ['web/**', '.github/workflows/web-ci.yml']
+    paths:
+      - 'web/**'
+      - '.github/workflows/web-ci.yml'
   pull_request:
-    paths: ['web/**', '.github/workflows/web-ci.yml']
+    paths:
+      - 'web/**'
+      - '.github/workflows/web-ci.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
