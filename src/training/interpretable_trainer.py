@@ -521,7 +521,8 @@ class InterpretableTrainer:
         try:
             learning_results = new_learner.learning_mode(teaching_examples, learning_rate=0.01)
             return learning_results.get('accuracy', 0.5)
-        except:
+        except (AttributeError, KeyError, TypeError, RuntimeError) as e:
+            self.logger.warning(f"Learning evaluation failed: {e}")
             return 0.5  # Fallback score
     
     def _evaluate_teaching(self) -> float:
@@ -582,11 +583,12 @@ class InterpretableTrainer:
                 translated = DUAL_CHANNEL_SYSTEM.translate_between_populations(
                     message, alt_system
                 )
-                
+
                 # Check if translation preserves meaning
                 if translated.semantics == semantics:
                     translation_successes += 1
-            except:
+            except (AttributeError, KeyError, TypeError) as e:
+                self.logger.debug(f"Translation check failed for {semantics}: {e}")
                 pass
         
         translation_accuracy = translation_successes / len(test_semantics)

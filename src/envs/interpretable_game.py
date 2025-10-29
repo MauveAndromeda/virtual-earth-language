@@ -449,12 +449,13 @@ class InterpretableReferentialGame(gym.Env):
                 if value not in preferred_words and random.random() < 0.2:
                     # Sometimes use preferred word from same semantic category
                     biased_semantics[slot] = random.choice(preferred_words)
-        
+
         # Generate dual-channel message
         try:
             dual_message = DUAL_CHANNEL_SYSTEM.encode_message(biased_semantics)
-        except:
+        except (AttributeError, KeyError, RuntimeError, ValueError) as e:
             # Fallback if encoding fails
+            logger.warning(f"Dual-channel encoding failed: {e}")
             dual_message = DualChannelMessage(
                 c_channel=[1, 2, 3, 4, 0, 0, 0, 0],
                 e_channel=f"PLAN({biased_semantics})",
@@ -564,8 +565,9 @@ class InterpretableReferentialGame(gym.Env):
             # Calculate semantic similarity
             distance = ENHANCED_SLOT_SYSTEM.semantic_distance(original_semantics, corrupted_semantics)
             robustness = 1.0 - distance
-            
-        except:
+
+        except (AttributeError, KeyError, ValueError, RuntimeError) as e:
+            logger.debug(f"Robustness calculation failed: {e}")
             robustness = 0.5  # Default moderate robustness
         
         return robustness

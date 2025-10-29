@@ -236,7 +236,8 @@ class InterpretableLossFunction:
         try:
             mi = mutual_info_score(semantic_codes, message_codes)
             return float(mi)
-        except:
+        except (ValueError, IndexError, RuntimeError) as e:
+            logger.debug(f"Mutual information computation failed: {e}")
             return 0.0
     
     def _compute_topological_similarity(

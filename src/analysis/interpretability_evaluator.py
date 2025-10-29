@@ -194,8 +194,9 @@ class InterpretabilityEvaluator:
                     test_data['messages'].append(dual_message.e_channel)
                     test_data['c_channels'].append(dual_message.c_channel)
                     test_data['e_channels'].append(dual_message.e_channel)
-                except:
-                    # Fallback
+                except (AttributeError, KeyError, RuntimeError, ValueError) as e:
+                    # Fallback for failed message generation
+                    logger.warning(f"Message generation failed: {e}")
                     test_data['dual_messages'].append(None)
                     test_data['messages'].append("FALLBACK_MESSAGE")
                     test_data['c_channels'].append([0] * 12)
@@ -210,7 +211,8 @@ class InterpretabilityEvaluator:
                         'interpretability_metrics': metrics
                     }
                     test_data['speaker_outputs'].append(speaker_out)
-                except:
+                except (AttributeError, KeyError, TypeError) as e:
+                    logger.debug(f"Speaker output extraction failed: {e}")
                     test_data['speaker_outputs'].append({})
                 
                 # Mock attention weights
@@ -264,8 +266,9 @@ class InterpretabilityEvaluator:
                 if (self.slot_system.semantic_distance(original_sem, c_to_sem) < 0.1 and
                     self.slot_system.semantic_distance(original_sem, e_to_sem) < 0.1):
                     semantic_matches += 1
-                    
-            except:
+
+            except (AttributeError, KeyError, IndexError, ValueError) as e:
+                logger.debug(f"Consistency check failed: {e}")
                 pass
         
         if individual_scores:
@@ -331,8 +334,9 @@ class InterpretabilityEvaluator:
                         corr = torch.corrcoef(torch.stack([positions, slot_weights]))[0, 1]
                         if not torch.isnan(corr):
                             correlations.append(float(corr))
-                            
-            except:
+
+            except (RuntimeError, IndexError, ValueError) as e:
+                logger.debug(f"Alignment correlation computation failed: {e}")
                 pass
         
         if len(test_data['attention_weights']) > 0:
@@ -424,11 +428,12 @@ class InterpretabilityEvaluator:
                     
                     # Try to decode with "public" decoder (no training on this specific agent)
                     decoded_sem = self.dual_channel.decode_c_channel(message.c_channel)
-                    
+
                     # Check if decoding preserves meaning
                     if self.slot_system.semantic_distance(semantics, decoded_sem) < 0.2:
                         public_decode_successes += 1
-            except:
+            except (AttributeError, KeyError, ValueError) as e:
+                logger.debug(f"Public decodability check failed: {e}")
                 pass
         
         anti_encryption_scores['public_decodability'] = public_decode_successes / min(50, len(test_data['semantics']))
@@ -448,11 +453,12 @@ class InterpretabilityEvaluator:
                 # Test if meaning is preserved
                 original_sem = self.dual_channel.decode_c_channel(message)
                 noisy_sem = self.dual_channel.decode_c_channel(noisy_message)
-                
+
                 if self.slot_system.semantic_distance(original_sem, noisy_sem) < 0.3:
                     noise_robust_count += 1
-                    
-            except:
+
+            except (IndexError, ValueError, RuntimeError) as e:
+                logger.debug(f"Noise robustness check failed: {e}")
                 pass
         
         anti_encryption_scores['noise_robustness_5pct'] = noise_robust_count / min(50, len(test_data['c_channels']))
