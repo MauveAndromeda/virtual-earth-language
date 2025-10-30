@@ -6,7 +6,7 @@
 [![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
-[![Tests](https://img.shields.io/badge/tests-36_passing-brightgreen.svg)](./tests)
+[![Tests](https://img.shields.io/badge/tests-38_passing-brightgreen.svg)](./tests)
 
 ## 🚀 Overview
 
@@ -30,7 +30,7 @@ Virtual Earth is a research framework addressing the **"dark language problem"**
 2. **Dual-Channel Communication**
    - **C-Channel**: Efficient discrete codes (e.g., `ACT:MOVE|OBJ:CIRCLE|ATTR:RED|LOC:L01`)
    - **E-Channel**: Explanations (e.g., `PLAN(DO(MOVE), TARGET(CIRCLE), AT(LEFT))`)
-   - **Consistency Loss**: Enforces >95% bidirectional translation accuracy
+   - **Consistency Loss**: Targets >95% bidirectional translation accuracy
 
 3. **Comprehensive Evaluation**
    - C↔E consistency metrics
@@ -304,7 +304,7 @@ pytest tests/test_slot_grammar.py -v
 pytest tests/test_consistency.py -v
 ```
 
-**Current Coverage:** 36 test cases across 4 modules (morphology, AST parser, slot grammar, consistency)
+**Current Coverage:** 38 test cases across 5 modules (morphology, AST parser, slot grammar, consistency, slots)
 
 ## 🛠️ Development
 
@@ -394,8 +394,8 @@ pytest tests/ --timeout=30
 ⚠️ **This is research software under active development.**
 
 - Core modules: ✅ Production-ready
-- Test suite: ✅ 36 tests passing (91.7%)
-- Experiments: 🟡 Functional but require dependencies
+- Test suite: ✅ 38 tests passing (100%)
+- Experiments: ✅ All functional (minimal dependencies)
 - Documentation: 🟡 Partial coverage
 - Large-scale evaluation: ⏳ Coming soon
 

@@ -17,9 +17,27 @@ Consistency Target: >95% for interpretability guarantee
 import re
 from typing import Dict, List, Tuple, Optional, Union, Any
 from dataclasses import dataclass
-import numpy as np
 from difflib import SequenceMatcher
 import logging
+
+# Make numpy optional
+try:
+    import numpy as np
+    HAS_NUMPY = True
+except ImportError:
+    HAS_NUMPY = False
+    # Provide minimal fallbacks for numpy functionality
+    class np:  # type: ignore
+        @staticmethod
+        def mean(x):
+            return sum(x) / len(x) if x else 0.0
+
+        @staticmethod
+        def std(x):
+            if not x:
+                return 0.0
+            m = sum(x) / len(x)
+            return (sum((i - m) ** 2 for i in x) / len(x)) ** 0.5
 
 
 logger = logging.getLogger(__name__)
