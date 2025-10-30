@@ -1,0 +1,36 @@
+# Development Dependencies for Virtual Earth Language
+# Install with: pip install -r requirements-dev.txt
+
+# Core dependencies (from requirements.txt)
+-r requirements.txt
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-xdist>=3.3.1  # Parallel testing
+pytest-timeout>=2.1.0
+
+# Code Quality
+black>=23.7.0  # Code formatting
+isort>=5.12.0  # Import sorting
+flake8>=6.1.0  # Linting
+pylint>=2.17.0  # Advanced linting
+mypy>=1.5.0  # Type checking
+
+# Documentation
+sphinx>=7.1.0
+sphinx-rtd-theme>=1.3.0
+sphinx-autodoc-typehints>=1.24.0
+
+# Development Tools
+ipython>=8.14.0
+ipdb>=0.13.13  # Debugging
+pre-commit>=3.3.3  # Git hooks
+
+# Performance Profiling
+line-profiler>=4.1.0
+memory-profiler>=0.61.0
+
+# Security
+safety>=2.3.0  # Dependency vulnerability scanning
+bandit>=1.7.5  # Security linting

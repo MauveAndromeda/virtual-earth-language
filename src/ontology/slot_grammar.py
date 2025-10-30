@@ -94,7 +94,7 @@ class GrammarRule:
 
     def __repr__(self) -> str:
         rhs_str = " ".join(str(s) for s in self.rhs)
-        return f"{self.lhs} ’ {rhs_str} (p={self.probability:.2f})"
+        return f"{self.lhs} -> {rhs_str} (p={self.probability:.2f})"
 
 
 @dataclass
@@ -213,11 +213,11 @@ class SlotGrammar:
         Add standard slot grammar rules.
 
         Standard grammar:
-            MESSAGE ’ CLAUSE
-            CLAUSE ’ ACTION_PHRASE OBJECT_PHRASE? LOC_PHRASE?
-            ACTION_PHRASE ’ MODIFIER? ACTION
-            OBJECT_PHRASE ’ ATTRIBUTE* OBJECT
-            LOC_PHRASE ’ LOCATION MODIFIER?
+            MESSAGE ï¿½ CLAUSE
+            CLAUSE ï¿½ ACTION_PHRASE OBJECT_PHRASE? LOC_PHRASE?
+            ACTION_PHRASE ï¿½ MODIFIER? ACTION
+            OBJECT_PHRASE ï¿½ ATTRIBUTE* OBJECT
+            LOC_PHRASE ï¿½ LOCATION MODIFIER?
         """
         # Top-level rules
         self.add_rule("MESSAGE", ["CLAUSE"])
